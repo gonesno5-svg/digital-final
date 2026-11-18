@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강제구매 마켓 - 강구마켓</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <script src="script.js?v=3" defer></script>
+</head>
+<body>
+
+
+  <section id="stage1" class="stage-market">
+    
+    <!-- 8컬럼 그리드 정렬 컨테이너 -->
+    <div class="stage-inner">
+
+      <!-- 상단 헤더: 로고 -->
+      <header class="market-header">
+        <div class="logo-wrap">
+          <img src="img/logo.png" alt="강제구매 마켓" class="market-logo">
+        </div>
+      </header>
+
+      <!-- 상단 스크롤 구매 유도 배너 -->
+      <div class="scroll-guide-wrap">
+        <div class="scroll-guide-banner">
+          <span class="guide-text">아래로 스크롤하여 모든 상품과 리뷰를 확인하고 구매하세요!</span>
+        </div>
+      </div>
+
+      <!-- 상단 메인 빅 슬라이더 배너 (자동 롤링) -->
+      <div class="slider-section">
+        <div class="slider-container">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slide-slide">
+              <img src="img/slide1.png" alt="이벤트 배너 1" class="slide-image">
+            </div>
+            <div class="slide-slide">
+              <img src="img/slide2.png" alt="이벤트 배너 2" class="slide-image">
+            </div>
+            <div class="slide-slide">
+              <img src="img/slide3.png" alt="이벤트 배너 3" class="slide-image">
+            </div>
+          </div>
+
+          <!-- 좌우 이동 화살표 -->
+          <button id="sliderPrev" class="slide-arrow prev" type="button" aria-label="이전">‹</button>
+          <button id="sliderNext" class="slide-arrow next" type="button" aria-label="다음">›</button>
+
+          <!-- 인디케이터 도트 -->
+          <div class="slider-indicators" id="sliderIndicators">
+            <span class="indicator-dot active" data-index="0"></span>
+            <span class="indicator-dot" data-index="1"></span>
+            <span class="indicator-dot" data-index="2"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 그릭요거트 광고 + 우측 겹친 리뷰 3개 -->
+      <div class="ad-section-row">
+        <div class="product-banner-box pop-card">
+          <img src="img/ad_yogurt.png" alt="한정선 그릭요거트 신메뉴" class="ad-image">
+        </div>
+
+        <div class="review-stack-right">
+          <div class="review-item stack-1 pop-card">
+            <img src="img/review.png" alt="리뷰 1" class="review-img">
+          </div>
+          <div class="review-item stack-2 pop-card">
+            <img src="img/review2.png" alt="리뷰 2" class="review-img">
+          </div>
+          <div class="review-item stack-3 pop-card">
+            <img src="img/review3.png" alt="리뷰 3" class="review-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- 좌측 겹친 리뷰 2개 + 우측 치이카와 인형 키링 광고 -->
+      <div class="ad-section-row reverse">
+        <div class="product-banner-box pop-card">
+          <img src="img/ad_chiikawa.png" alt="치이카와 귀여움이 한가득!" class="ad-image">
+        </div>
+
+        <div class="review-stack-left">
+          <div class="review-item stack-4 pop-card">
+            <img src="img/review4.png" alt="리뷰 4" class="review-img">
+          </div>
+          <div class="review-item stack-5 pop-card">
+            <img src="img/review5.png" alt="리뷰 5" class="review-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- 강제구매 버튼 영역 -->
+      <div class="stage1-bottom-cta">
+        <button id="finalBuyBtn" class="forced-buy-btn" type="button">
+          지금 즉시 구매하기
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- 스크롤 시 화면에 튀어나오는 팝업 컨테이너 -->
+    <div id="popupContainer" class="popup-container"></div>
+  </section>
+
+
+  <!-- ==========================================================
+       [STAGE 2 : 진실 폭로 (반전 화면 - 5단계 심층 인터랙션)]
+  ========================================================== -->
+  <section id="stage2" class="stage-truth">
+    <div class="truth-grid-container">
+      <div class="truth-content-wrap">
+
+        <!-- 1. 첫 화면부터 사용자를 의심하게 만들기 -->
+        <div class="truth-section section-doubt" id="truthSec1">
+       
+          <h2 class="doubt-headline">
+            당신의 소비는 정말 당신의 선택일까요?<br>
+            당신이 원해서 산 걸까요?<br>
+            <span class="highlight-text">아니면, 원하도록 만들어진 걸까요?</span>
+          </h2>
+          <div class="doubt-btn-group">
+            <button type="button" id="btnChoiceSelf" class="doubt-choice-btn">내가 선택했다</button>
+            <button type="button" id="btnChoiceAlgo" class="doubt-choice-btn">알고리즘의 영향이다</button>
+          </div>
+          <div id="choiceFeedback" class="choice-feedback-box">
+            <p id="choiceFeedbackText"></p>
+        
+          </div>
+        </div>
+
+        <!-- 2. 지금 있는 통계 3개는 숫자가 나타나는 방식으로 (카운트업) -->
+        <div class="truth-section section-stats" id="truthSec2">
+        
+          <h3 class="section-title">소비자들은 왜 구매했을까?</h3>
+          <p class="section-desc">필요해서가 아니다. 자꾸보이니까, 갖고 싶어졌다.</p>
+          
+          
+          <div class="stats-counter-grid">
+            <div class="stat-card" data-count="45.3" data-decimals="1">
+              <div class="stat-num"><span class="count-val">0</span>%</div>
+              <div class="stat-label">인플루언서 추천으로 상품을 구매한 소비자</div>
+            </div>
+            <div class="stat-card" data-count="31" data-decimals="0">
+              <div class="stat-num"><span class="count-val">0</span>%</div>
+              <div class="stat-label">SNS로 인해 충동구매가 늘어난 소비자</div>
+            </div>
+            <div class="stat-card" data-count="66" data-decimals="0">
+              <div class="stat-num"><span class="count-val">0</span>%</div>
+              <div class="stat-label">유행하는 상품에 대한 기대를 믿는 Z세대</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 구매 노출 횟수 그래프 -->
+        <div class="truth-section section-graph" id="truthSec3">
+         
+          <h3 class="section-title">몇 번이나 봐야 구매하게 될까?</h3>
+          <p class="section-desc">막대를 눌러 조사 결과를 확인해 보세요.</p>
+
+          <div class="graph-interactive-wrap">
+            <div class="bar-chart-container">
+              <!-- 1회 (1.6%) -->
+              <div class="chart-bar-col" data-pct="1.6" data-label="1회" data-desc="1회 노출만으로 구매했다고 응답한 비율 (대부분의 소비자는 단 1번의 노출로는 반응하지 않습니다.)" data-reps="1">
+                <div class="bar-top-val">1.6%</div>
+                <div class="bar-track">
+                  <div class="bar-fill" style="height: 14%;"></div>
+                </div>
+                <div class="bar-bottom-label">1회</div>
+              </div>
+
+              <!-- 2~3회 (21.9%) -->
+              <div class="chart-bar-col" data-pct="21.9" data-label="2~3회" data-desc="2~3회 노출 후 구매했다고 응답한 비율 (상품에 대한 낯섦이 서서히 호기심으로 바뀌는 구간입니다.)" data-reps="3">
+                <div class="bar-top-val">21.9%</div>
+                <div class="bar-track">
+                  <div class="bar-fill" style="height: 72%;"></div>
+                </div>
+                <div class="bar-bottom-label">2~3회</div>
+              </div>
+
+              <!-- 4~5회 (24.1% - 기본 활성) -->
+              <div class="chart-bar-col active" data-pct="24.1" data-label="4~5회" data-desc="24.1% 4~5회 노출 후 구매했다고 응답한 비율&#10;(2025년 미국 소비자 조사 수치 기반, 각 비율은 구매확률이 아니라 해당 노출 횟수를 선택한 응답 비율입니다.)" data-reps="5">
+                <div class="bar-top-val">24.1%</div>
+                <div class="bar-track">
+                  <div class="bar-fill" style="height: 90%;"></div>
+                </div>
+                <div class="bar-bottom-label">4~5회</div>
+              </div>
+
+              <!-- 6~10회 (18.4%) -->
+              <div class="chart-bar-col" data-pct="18.4" data-label="6~10회" data-desc="6~10회 노출 후 구매했다고 응답한 비율 (지속적인 리타겟팅과 바이럴 노출이 소비 결정을 압박합니다.)" data-reps="8">
+                <div class="bar-top-val">18.4%</div>
+                <div class="bar-track">
+                  <div class="bar-fill" style="height: 62%;"></div>
+                </div>
+                <div class="bar-bottom-label">6~10회</div>
+              </div>
+
+              <!-- 11회 이상 (17.4%) -->
+              <div class="chart-bar-col" data-pct="17.4" data-label="11회 이상" data-desc="11회 이상 노출 후 구매했다고 응답한 비율 (끝없는 알고리즘 반복 노출에 둘러싸여 결국 구매로 이어진 응답자입니다.)" data-reps="12">
+                <div class="bar-top-val">17.4%</div>
+                <div class="bar-track">
+                  <div class="bar-fill" style="height: 58%;"></div>
+                </div>
+                <div class="bar-bottom-label">11회 이상</div>
+              </div>
+            </div>
+
+            <!-- 막대 클릭 시 상세 설명 영역 -->
+            <div id="graphDetailBox" class="graph-detail-card">
+              <div class="graph-detail-highlight" id="graphDetailPct">24.1%</div>
+              <div class="graph-detail-sub" id="graphDetailSub">4~5회 노출 후 구매했다고 응답한 비율</div>
+              <div class="graph-detail-note" id="graphDetailNote">2025년 미국 소비자 조사 수치 기반 각 비율은 구매확률이 아니라 해당 노출 횟수를 선택한 응답 비율</div>
+            </div>
+
+            <!-- 막대 호버 시 반복 노출 시뮬레이션 토스트 -->
+            <div id="graphHoverPreview" class="graph-hover-preview">
+              <div class="preview-header">
+                <span class="preview-badge">반복 노출 체감 시뮬레이션</span>
+                <span id="previewCountText" class="preview-count-text">4~5회 연속 노출 중...</span>
+              </div>
+              <div class="preview-icons" id="previewIcons"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. 알고리즘의 소비 유도 구조 -->
+        <div class="truth-section section-flow" id="truthSecFlow">
+          <div class="flow-header-wrap">
+            <h3 class="section-title">알고리즘의 소비 유도 구조</h3>
+            <p class="section-desc">검색에서 구매까지, 소비자를 이끄는 4단계 흐름</p>
+          </div>
+
+          <div class="flow-step-container">
+            <div class="flow-step-item">
+              <div class="flow-name">SEARCH</div>
+              <div class="flow-desc">검색</div>
+            </div>
+            <div class="flow-arrow-wrap">→</div>
+            <div class="flow-step-item">
+              <div class="flow-name">RECOMMEND</div>
+              <div class="flow-desc">알고리즘</div>
+            </div>
+            <div class="flow-arrow-wrap">→</div>
+            <div class="flow-step-item">
+              <div class="flow-name">EXPOSE</div>
+              <div class="flow-desc">반복 노출</div>
+            </div>
+            <div class="flow-arrow-wrap">→</div>
+            <div class="flow-step-item flow-buy">
+              <div class="flow-icon-circle">🛒</div>
+              <div class="flow-name">BUY</div>
+              <div class="flow-desc">구매</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. 마케팅 심리 직접 체험하기 (체험 2가지) -->
+        <div class="truth-section section-experience" id="truthSec4">
+          <div class="exp-header-wrap">
+            <h3 class="section-title">마케팅 심리 직접 체험하기</h3>
+            <p class="section-desc">반복 노출과 시간 압박의 심리적 변화를 직접 경험해 보세요.</p>
+          </div>
+
+          <div class="experience-grid">
+            <!-- [체험 1: 반복 노출 인터랙티브 시뮬레이터] -->
+            <div class="exp-box exp-repetition">
+              <div class="exp-tag">체험 1 · 단순 노출 효과 (Mere Exposure Effect)</div>
+              <h4 class="exp-heading">반복 노출 체험</h4>
+              <p class="exp-lead">“어디서 많이 본 것 같은데?”라는 느낌을 직접 경험</p>
+              <p class="exp-desc">
+                동일한 상품이 반복해서 눈에 띌수록, 뇌는 낯섦을 친숙함과 선호도로 착각하기 시작합니다.<br>
+                아래 '다음 노출 경험하기' 버튼을 눌러 노출 횟수를 늘려보며 심리와 카드의 변화를 확인해 보세요.
+              </p>
+
+              <!-- 인터랙티브 체험 디스플레이 -->
+              <div class="rep-interactive-viewer">
+                <!-- 심리 게이지 바 -->
+                <div class="rep-meter-wrap">
+                  <div class="rep-meter-header">
+                    <span class="rep-meter-title">뇌의 친밀도 & 구매 확신도</span>
+                    <span id="repMeterVal" class="rep-meter-val">20%</span>
+                  </div>
+                  <div class="rep-meter-track">
+                    <div id="repMeterFill" class="rep-meter-fill" style="width: 20%;"></div>
+                  </div>
+                </div>
+
+                <!-- 소비자 내면의 독백 말풍선 -->
+                <div class="rep-bubble-wrap">
+                  <div class="rep-bubble-icon">💭</div>
+                  <div id="repThoughtText" class="rep-thought-text">
+                    "어? 이런 상품도 피드에 올라왔네..." <span class="thought-sub">(0.2초 찰나의 스침 / 무관심)</span>
+                  </div>
+                </div>
+
+                <!-- 실시간으로 커지고 화려해지는 반응형 카드 쇼케이스 -->
+                <div class="rep-card-stage">
+                  <div id="repDynamicCard" class="rep-dynamic-card stage-1">
+                    <div id="repBadge" class="rep-dynamic-badge">1단계 · 1회 노출</div>
+                    <div class="rep-card-content">
+                      <img id="repCardImg" src="img/ad_yogurt.png" alt="체험 상품" class="rep-dynamic-img">
+                      <div class="rep-card-info">
+                        <div id="repCardTitle" class="rep-dynamic-title">그릭요거트 찹쌀떡</div>
+                        <div id="repCardSubtitle" class="rep-dynamic-sub">피드 구석 작은 배너 (시각적 자극 최소)</div>
+                        <div id="repCardExtra" class="rep-dynamic-extra">작은 크기 · 주목도 20%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 다음 단계로 넘기는 액션 버튼 -->
+                <div class="rep-action-row">
+                  <button type="button" id="btnNextRepStage" class="rep-next-step-btn">👉 다음 노출 경험하기 (+반복 노출)</button>
+                  <button type="button" id="btnResetRepStage" class="rep-reset-step-btn">🔄 1단계로 리셋</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- [체험 2: 시간 압박 체험] -->
+            <div class="exp-box exp-pressure">
+              <div class="exp-tag">체험 2 · 손실 회피 & 조급함</div>
+              <h4 class="exp-heading">시간 압박 체험</h4>
+              <p class="exp-lead">“정말 필요한가?”보다 “놓치면 어떡하지?”를 생각하게 만들기</p>
+              
+
+              <div class="timer-demo-card">
+                <div class="timer-display">
+                  <span class="timer-label">마감까지 남은 시간</span>
+                  <div class="timer-clock-wrap">
+                    <span id="countdownNumber" class="timer-clock">10.0</span>
+                    <span class="timer-unit">초</span>
+                  </div>
+                </div>
+                <div class="timer-progress-track">
+                  <div id="timerProgressFill" class="timer-progress-fill"></div>
+                </div>
+                <div id="timerMessage" class="timer-dynamic-msg">
+                  ⏳ 10초 타이머가 시작됩니다. 정말 필요한지 생각할 틈을 줄까요?
+                </div>
+                <div class="timer-btn-row">
+                  <button type="button" id="btnDemoBuy" class="demo-buy-btn">⚡ 10초 안에 구매 확정</button>
+                  <button type="button" id="btnDemoReset" class="demo-reset-btn">🔄 다시 체험하기</button>
+                </div>
+                <div id="demoFeedback" class="demo-feedback-box"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. 마지막에는 반전을 주기 -->
+        <div class="truth-section section-climax" >
+          
+
+
+          <!-- 거대한 타이포그래피 반전 질문 -->
+          <div class="climax-typography-wrap">
+            <p class="climax-eyebrow">당신이 선택한 상품.</p>
+            <h2 class="climax-main-title">정말 당신의 취향이었을까요?</h2>
+            <div class="climax-divider-line"></div>
+            <p class="climax-punchline">
+              당신의 취향은 발견된 것일까,<br>
+              <span class="punchline-highlight">만들어진 것일까?</span>
+            </p>
+          </div>
+
+          <!-- 처음으로 돌아가기 버튼 -->
+          <div class="back-home-wrap">
+            <button id="backToTopBtn" class="back-to-top-btn" type="button">
+              ← 처음으로 돌아가서 다시 확인하기
+            </button>
+          </div>
+
+        </div>
+        <footer class="truth-footer">
+          <div class="footer-content">
+            <span class="footer-item footer-project">HKUN DIGITAL PUBLISHING 2</span>
+            <span class="footer-divider">/</span>
+            <span class="footer-item footer-team">24 김수정, 24 주윤영, 24 최효연</span>
+            <span class="footer-divider">/</span>
+            <span class="footer-item footer-notice">© 2026 디퍼2. All rights reserved.</span>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </section>
+
+
+</body>
+</html>
